@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductController">
+   <top>
+      <Label text="Adicionar Produto" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView id="listItemsTable" fx:id="listItemsTable" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+              <columns>
+                <TableColumn id="colId" fx:id="colId" prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="245.0" text="Produto" />
+                  <TableColumn minWidth="0.0" prefWidth="91.0" text="Valor" />
+                  <TableColumn prefWidth="90.0" text="Estoque" />
+                  <TableColumn prefWidth="97.0" text="Vendidos" />
+              </columns>
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="245.0" text="Produto" />
+                  <TableColumn minWidth="0.0" prefWidth="91.0" text="Valor" />
+                  <TableColumn prefWidth="90.0" text="Estoque" />
+                  <TableColumn prefWidth="97.0" text="Vendidos" />
+              </columns>
+            </TableView>
+            <Label layoutX="20.0" layoutY="192.0" text="Lista de Registros">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="225.0" text="Buscar" />
+            <TextField layoutX="72.0" layoutY="220.0" prefHeight="25.0" prefWidth="270.0" />
+            <Button layoutX="479.0" layoutY="173.0" mnemonicParsing="false" text="Adicionar Produto" AnchorPane.rightAnchor="27.0" />
+            <TextField id="txtQuantity" fx:id="txtQuantity" layoutX="437.0" layoutY="87.0" AnchorPane.leftAnchor="435.0" AnchorPane.topAnchor="85.0" />
+            <Label layoutX="21.0" layoutY="90.0" text="Estoque" AnchorPane.topAnchor="90.0" />
+            <TextField id="txtPrice" fx:id="txtPrice" layoutX="88.0" layoutY="85.0" prefHeight="25.0" prefWidth="224.0" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="85.0" />
+            <Label layoutX="366.0" layoutY="91.0" text="Valor Un." AnchorPane.topAnchor="90.0" />
+            <TextField id="txtName" fx:id="txtName" layoutX="87.0" layoutY="47.0" prefHeight="25.0" prefWidth="522.0" AnchorPane.leftAnchor="88.0" />
+            <Label layoutX="32.0" layoutY="50.0" text="Nome" />
+            <Label layoutX="388.0" layoutY="131.0" text="Total" AnchorPane.topAnchor="130.0" />
+            <TextField id="txtQuantity" fx:id="txtQuantity1" layoutX="437.0" layoutY="123.0" AnchorPane.leftAnchor="435.0" AnchorPane.topAnchor="125.0" />
+            <TextField id="txtPrice" fx:id="txtPrice1" layoutX="90.0" layoutY="116.0" prefHeight="25.0" prefWidth="223.0" AnchorPane.leftAnchor="88.0" AnchorPane.topAnchor="125.0" />
+            <Label layoutX="5.0" layoutY="123.0" text="Quantidade" AnchorPane.topAnchor="130.0" />
+            <Label layoutX="33.0" layoutY="22.0" text="Produto">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

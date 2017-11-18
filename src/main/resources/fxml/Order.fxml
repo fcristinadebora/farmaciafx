@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductController">
+   <top>
+      <Label text="Vendas" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <TabPane fx:id="tabProdutosRegistros" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="tabProdutoNovo" text="Nova Venda">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="32.0" layoutY="62.0" styleClass="subtitle" text="Cliente">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        
+                        <Button fx:id="btnRegister" layoutX="406.0" layoutY="504.0" mnemonicParsing="false" onAction="#doRegistration" prefHeight="25.0" prefWidth="245.0" text="Finalizar" />
+                        <Button fx:id="btnCancel" layoutX="660.0" layoutY="502.0" mnemonicParsing="false" onAction="#cancelRegistration" prefHeight="25.0" prefWidth="121.0" styleClass="btnCancel" stylesheets="@../styles/Styles.css" text="Cancelar" />
+                        <Button layoutX="390.0" layoutY="68.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Remover" AnchorPane.rightAnchor="320.0" />
+                        <TextField id="txtPrice" fx:id="txtPrice1" layoutX="32.0" layoutY="107.0" prefHeight="25.0" prefWidth="400.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="320.0" />
+                        <Label layoutX="33.0" layoutY="89.0" text="Nome" AnchorPane.leftAnchor="31.0" />
+                        <TextField layoutX="28.0" layoutY="163.0" AnchorPane.leftAnchor="31.0" />
+                        <Label layoutX="31.0" layoutY="144.0" text="CPF" AnchorPane.leftAnchor="31.0" />
+                        <Label layoutX="251.0" layoutY="146.0" text="Nascimento" />
+                        <TextField layoutX="248.0" layoutY="164.0" prefHeight="25.0" prefWidth="125.0" />
+                        <Separator layoutX="-1.0" layoutY="198.0" prefHeight="13.0" prefWidth="483.0" AnchorPane.rightAnchor="318.0" />
+                        <Label layoutX="32.0" layoutY="235.0" styleClass="subtitle" text="Produtos" AnchorPane.leftAnchor="32.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="29.0" layoutY="263.0" prefHeight="214.0" prefWidth="413.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="320.0">
+                          <columns>
+                              <TableColumn prefWidth="44.0" text="ID" />
+                            <TableColumn prefWidth="183.0" text="Produto" />
+                            <TableColumn prefWidth="60.0" text="Valor" />
+                              <TableColumn prefWidth="49.0" text="Qtde" />
+                              <TableColumn prefWidth="78.0" text="Total" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="314.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Editar" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="231.0" />
+                        <Label layoutX="29.0" layoutY="20.0" styleClass="title" text="Nova Venda" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="376.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Excluir" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="231.0" />
+                        <Button layoutX="193.0" layoutY="232.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Adicionar" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="231.0" />
+                        <Label alignment="CENTER_RIGHT" layoutX="535.0" layoutY="25.0" styleClass="subtitle" text="Subtotais" AnchorPane.bottomAnchor="501.0" AnchorPane.leftAnchor="550.0">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="546.0" layoutY="162.0" styleClass="order-totals__labels" text="Desconto" AnchorPane.bottomAnchor="364.0" AnchorPane.leftAnchor="550.0" />
+                        <Label layoutX="545.0" layoutY="250.0" styleClass="order-totals__labels" text="Total" AnchorPane.bottomAnchor="276.0" AnchorPane.leftAnchor="550.0" />
+                        <Label layoutX="543.0" layoutY="324.0" styleClass="order-totals__labels" text="Pago" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="550.0" />
+                        <Label alignment="CENTER_RIGHT" layoutX="550.0" layoutY="411.0" styleClass="order-totals__labels" text="Troco" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="550.0" />
+                        <TextField layoutX="548.0" layoutY="91.0" prefHeight="33.0" prefWidth="250.0" styleClass="order-totals__fields" AnchorPane.bottomAnchor="422.0" AnchorPane.leftAnchor="548.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="543.0" layoutY="186.0" prefWidth="250.0" styleClass="order-totals__fields" AnchorPane.bottomAnchor="327.0" AnchorPane.leftAnchor="550.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="543.0" layoutY="274.0" prefWidth="250.0" styleClass="order-totals__fields" AnchorPane.bottomAnchor="239.0" AnchorPane.leftAnchor="550.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="543.0" layoutY="346.0" prefWidth="250.0" styleClass="order-totals__fields" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="550.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="543.0" layoutY="434.0" prefWidth="250.0" styleClass="order-totals__fields" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="550.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="533.0" layoutY="71.0" styleClass="order-totals__labels" text="Subtotal" AnchorPane.leftAnchor="550.0" />
+                        <Separator layoutX="505.0" layoutY="5.0" orientation="VERTICAL" prefHeight="453.0" prefWidth="7.0" AnchorPane.bottomAnchor="60.0" AnchorPane.topAnchor="10.0" />
+                        <Label layoutX="29.0" layoutY="487.0" text="4 iten(s)" />
+                        <Button layoutX="285.0" layoutY="68.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="93.0" text="Selecionar" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Registros">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView id="listItemsTable" fx:id="listItemsTable" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                          <columns>
+                            <TableColumn id="colId" fx:id="colId" prefWidth="75.0" text="ID" />
+                            <TableColumn prefWidth="245.0" text="Produto" />
+                              <TableColumn minWidth="0.0" prefWidth="91.0" text="Valor" />
+                              <TableColumn prefWidth="90.0" text="Estoque" />
+                              <TableColumn prefWidth="97.0" text="Vendidos" />
+                          </columns>
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID" />
+                            <TableColumn prefWidth="245.0" text="Produto" />
+                              <TableColumn minWidth="0.0" prefWidth="91.0" text="Valor" />
+                              <TableColumn prefWidth="90.0" text="Estoque" />
+                              <TableColumn prefWidth="97.0" text="Vendidos" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="23.0" layoutY="21.0" text="Lista de Registros">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="537.0" layoutY="89.0" mnemonicParsing="false" text="Detalhes" AnchorPane.rightAnchor="20.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
