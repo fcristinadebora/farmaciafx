@@ -1,15 +1,19 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -21,7 +25,7 @@ import model.classes.StockProduct;
 import model.dao.StockProductDAO;
 import model.database.DatabaseMySQL;
 
-public class ProductController {
+public class ProductController implements Initializable{
 	
 	@FXML
 	private TextField txtName;
@@ -29,19 +33,28 @@ public class ProductController {
 	private TextField txtPrice;
 	@FXML
 	private TextField txtQuantity;
-	@FXML
-	private TableView<Object> listItemsTable;
-	@FXML
-	private TableColumn colId;
-	@FXML
-	private TableColumn colName;
-	@FXML
-	private TableColumn colPrice;
-	@FXML
-	private TableColumn colQuantity;
 	
-	public ProductController() throws IOException {
-		this.listItems();
+	@FXML
+	private TableView<StockProduct> tableViewStockProduct;
+	@FXML
+	private TableColumn<StockProduct, Integer> colId;
+	@FXML
+	private TableColumn<StockProduct, String> colName;
+	@FXML
+	private TableColumn<StockProduct, Integer> colPrice;
+	@FXML
+	private TableColumn<StockProduct, Integer>colQuantity;	
+	
+    private ObservableList<StockProduct> observableListStockProduct;
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
+			this.listItems();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -49,34 +62,14 @@ public class ProductController {
         StockProductDAO proDao = new StockProductDAO();
 		Connection con = DatabaseMySQL.getConnection();
 		proDao.setConnection((com.mysql.jdbc.Connection) con);
-		List<StockProduct> itemList = new ArrayList<StockProduct>();
-		itemList = proDao.listar();
-		
-		System.out.println(itemList.size());
-		
-		listItemsTable = new TableView<>();
-		
-		colId = new TableColumn<>("ID");
-		colName = new TableColumn<>("Nome");
-		colPrice = new TableColumn<>("Valor");
-		colQuantity = new TableColumn<>("Quantidade2");
-		
-		
-		colId.setCellFactory(new PropertyValueFactory<>("id"));
-		colName.setCellFactory(new PropertyValueFactory<>("name"));
-		colPrice.setCellFactory(new PropertyValueFactory<>("price"));
-		colQuantity.setCellFactory(new PropertyValueFactory<>("quantity"));
-		
-		listItemsTable.setItems(FXCollections.observableArrayList(itemList));
-		listItemsTable.getColumns().addAll(colId, colName, colPrice, colQuantity);
-		
-        //for(StockProduct actualItem : itemList) {
-			
-	    //}
-		 
-		 
-		
-		
+		List<StockProduct> itemList = proDao.listar();
+
+		colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        observableListStockProduct = FXCollections.observableArrayList(itemList);
+        tableViewStockProduct.setItems(observableListStockProduct);
     }
 	
 	@FXML

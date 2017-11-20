@@ -2,6 +2,10 @@ package model.dao;
 
 import model.classes.StockProduct;
 import com.mysql.jdbc.Connection;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -22,7 +22,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView id="listItemsTable" fx:id="listItemsTable" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                        <TableView id="tableViewStockProduct" fx:id="tableViewStockProduct" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                        	<columns>
+                        		<TableColumn fx:id="colId" text="ID"></TableColumn>
+                        		<TableColumn fx:id="colName" text="Produto"></TableColumn>
+                        		<TableColumn fx:id="colPrice" text="Valor"></TableColumn>
+                        		<TableColumn fx:id="colQuantity" text="Estoque"></TableColumn>
+                        	</columns>
                         </TableView>
                         <Label layoutX="20.0" layoutY="26.0" text="Lista de Registros">
                            <font>
