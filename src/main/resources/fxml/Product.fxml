@@ -18,7 +18,7 @@
    <center>
       <TabPane fx:id="tabProdutosRegistros" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Registros">
+          <Tab text="Registros" fx:id="tabListaRegistros">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -28,6 +28,9 @@
                         		<TableColumn fx:id="colName" text="Produto"></TableColumn>
                         		<TableColumn fx:id="colPrice" text="Valor"></TableColumn>
                         		<TableColumn fx:id="colQuantity" text="Estoque"></TableColumn>
+                        		<TableColumn fx:id="colOpen" text="Ver"></TableColumn>
+                        		<TableColumn fx:id="colAlter" text="Editar"></TableColumn>
+                        		<TableColumn fx:id="colDelete" text="Excluir"></TableColumn>
                         	</columns>
                         </TableView>
                         <Label layoutX="20.0" layoutY="26.0" text="Lista de Registros">

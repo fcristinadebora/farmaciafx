@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,6 +18,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -43,13 +50,29 @@ public class ProductController implements Initializable{
 	@FXML
 	private TableColumn<StockProduct, Integer> colPrice;
 	@FXML
-	private TableColumn<StockProduct, Integer>colQuantity;	
+	private TableColumn<StockProduct, Integer>colQuantity;
+	@FXML
+	private TableColumn colOpen;
+	@FXML
+	private TableColumn colAlter;
+	@FXML
+	private TableColumn colDelete;
+	@FXML 
+	private TabPane tabProdutosRegistros; 
+	@FXML
+	private Tab tabListaRegistros;
+	@FXML
+	private Button btnCancel;
+	@FXML
+	private Button btnRegister;
 	
+	private SingleSelectionModel<Tab> selectionModel;	
     private ObservableList<StockProduct> observableListStockProduct;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
+			selectionModel = tabProdutosRegistros.getSelectionModel();
 			this.listItems();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -59,7 +82,7 @@ public class ProductController implements Initializable{
 	
 	@FXML
     public void listItems() throws IOException{
-        StockProductDAO proDao = new StockProductDAO();
+		StockProductDAO proDao = new StockProductDAO();
 		Connection con = DatabaseMySQL.getConnection();
 		proDao.setConnection((com.mysql.jdbc.Connection) con);
 		List<StockProduct> itemList = proDao.listar();
@@ -68,12 +91,45 @@ public class ProductController implements Initializable{
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        
+        /*
+        colOpen.setCellValueFactory(
+        	    param -> new ReadOnlyObjectWrapper<>(param.getValue())
+        	);
+        	colOpen.setCellFactory(param -> new TableCell<StockProduct, StockProduct>() {
+        	    private final Button deleteButton = new Button("Unfriend");
+
+        	    @Override
+        	    protected void updateItem(StockProduct person, boolean empty) {
+        	        super.updateItem(person, empty);
+
+        	        if (person == null) {
+        	            setGraphic(null);
+        	            return;
+        	        }
+
+        	        setGraphic(deleteButton);
+        	        deleteButton.setOnAction(
+        	            event -> getTableView().getItems().remove(person)
+        	        );
+        	    }
+        	});
+        */
+        
         observableListStockProduct = FXCollections.observableArrayList(itemList);
         tableViewStockProduct.setItems(observableListStockProduct);
+        
     }
 	
 	@FXML
     public void doRegistration(ActionEvent e) throws IOException{
+		btnRegister.setDisable(true);
+		btnCancel.setDisable(true);
+		txtName.setEditable(false);
+		txtPrice.setEditable(false);
+		txtQuantity.setEditable(false);
+		
+		
         StockProduct pro = new StockProduct();
         pro.setName(txtName.getText());
 		pro.setPrice(Integer.parseInt(txtPrice.getText()));
@@ -83,12 +139,42 @@ public class ProductController implements Initializable{
 		Connection con = DatabaseMySQL.getConnection();
 		proDao.setConnection((com.mysql.jdbc.Connection) con);
 		proDao.inserir(pro);
+		
+		JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
+		
+        this.listItems();
+        selectionModel.select(tabListaRegistros);
+
+		txtName.setText("");
+        txtPrice.setText("");
+        txtQuantity.setText("");
+        btnRegister.setDisable(false);
+		btnCancel.setDisable(false);
+		txtName.setEditable(true);
+		txtPrice.setEditable(true);
+		txtQuantity.setEditable(true);
     }
 	
 	@FXML
     public void cancelRegistration(ActionEvent e) throws IOException{
-        txtName.setText("");
+		btnRegister.setDisable(true);
+		btnCancel.setDisable(true);
+		
+		txtName.setText("");
         txtPrice.setText("");
         txtQuantity.setText("");
+        
+        int confirm = JOptionPane.showConfirmDialog(null, "Deseja cancelar o cadastro?");
+		if (confirm == JOptionPane.YES_OPTION) {
+			selectionModel.select(tabListaRegistros);
+		}
+		
+		btnRegister.setDisable(false);
+		btnCancel.setDisable(false);
+    }
+	
+	@FXML
+	public void editar(StockProduct pro) throws IOException{
+		System.out.println("Foi!");
     }
 }
