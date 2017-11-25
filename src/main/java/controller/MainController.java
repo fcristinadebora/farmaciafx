@@ -53,9 +53,8 @@ public class MainController implements Initializable{
 	@FXML
     public void handlerMenuClientes(ActionEvent e){
 		try {
-			System.out.println("Menu Clientes");
 			BorderPane content;
-			content = (BorderPane) FXMLLoader.load(getClass().getResource("/fxml/Product.fxml"));
+			content = (BorderPane) FXMLLoader.load(getClass().getResource("/fxml/Customer.fxml"));
 			contentPane.setCenter(content);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

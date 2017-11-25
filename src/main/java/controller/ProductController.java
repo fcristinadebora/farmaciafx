@@ -57,8 +57,6 @@ public class ProductController implements Initializable{
 	private TableColumn colAlter;
 	@FXML
 	private TableColumn colDelete;
-	@FXML 
-	private TabPane tabProdutosRegistros; 
 	@FXML
 	private Tab tabListaRegistros;
 	@FXML
@@ -72,7 +70,6 @@ public class ProductController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			selectionModel = tabProdutosRegistros.getSelectionModel();
 			this.listItems();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

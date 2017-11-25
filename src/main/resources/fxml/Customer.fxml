@@ -17,9 +17,9 @@
       </Label>
    </top>
    <center>
-      <TabPane fx:id="tabRegistros" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Registros">
+          <Tab text="Registros" fx:id="tabRegistros">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -33,12 +33,12 @@
                         <Button layoutX="491.0" layoutY="79.0" mnemonicParsing="false" text="Excluir" AnchorPane.rightAnchor="87.0" />
                         <Button layoutX="441.0" layoutY="79.0" mnemonicParsing="false" text="Ver" />
                         <Button layoutX="557.0" layoutY="79.0" mnemonicParsing="false" text="Editar" AnchorPane.rightAnchor="20.0" />
-                        <TableView id="listItemsTable" fx:id="listItemsTable" layoutX="20.0" layoutY="121.0" prefHeight="276.0" prefWidth="600.0">
+                        <TableView fx:id="listItemsTable" layoutX="20.0" layoutY="121.0" prefHeight="276.0" prefWidth="600.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="ID" />
-                              <TableColumn prefWidth="328.0" text="Cliente" />
-                              <TableColumn minWidth="0.0" prefWidth="86.0" text="CPF" />
-                              <TableColumn minWidth="0.0" prefWidth="107.0" text="Nascimento" />
+                              <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="colName" prefWidth="328.0" text="Cliente" />
+                              <TableColumn fx:id="colCpf" minWidth="0.0" prefWidth="86.0" text="CPF" />
+                              <TableColumn fx:id="colBirthDate" minWidth="0.0" prefWidth="107.0" text="Nascimento" />
                            </columns>
                         </TableView>
                      </children>
@@ -50,16 +50,16 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                      <Label layoutX="44.0" layoutY="102.0" text="Nome" />
-                     <TextField id="txtName" fx:id="txtName" layoutX="96.0" layoutY="98.0" prefHeight="25.0" prefWidth="505.0" AnchorPane.rightAnchor="39.0" />
+                     <TextField fx:id="txtName" layoutX="96.0" layoutY="98.0" prefHeight="25.0" prefWidth="505.0" AnchorPane.rightAnchor="39.0" />
                      <Label layoutX="59.0" layoutY="154.0" text="CPF" AnchorPane.topAnchor="154.0" />
-                     <TextField id="txtPrice" fx:id="txtPrice" layoutX="97.0" layoutY="147.0" AnchorPane.topAnchor="147.0" />
+                     <TextField fx:id="txtCpf" layoutX="97.0" layoutY="147.0" AnchorPane.topAnchor="147.0" />
                      <Label layoutX="24.0" layoutY="196.0" text="Endereço" />
                         <Label layoutX="355.0" layoutY="150.0" text="Nascimento" AnchorPane.topAnchor="150.0" />
-                        <TextField layoutX="447.0" layoutY="144.0" prefHeight="25.0" prefWidth="155.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="144.0" />
-                        <TextArea layoutX="99.0" layoutY="198.0" prefHeight="76.0" prefWidth="503.0" AnchorPane.rightAnchor="38.0" />
+                        <TextField layoutX="447.0" layoutY="144.0" fx:id="txtBirthDate" prefHeight="25.0" prefWidth="155.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="144.0" />
+                        <TextArea layoutX="99.0" fx:id="txtAddress" layoutY="198.0" prefHeight="76.0" prefWidth="503.0" AnchorPane.rightAnchor="38.0" />
                      
-                                 <Button fx:id="btnRegister" layoutX="411.0" layoutY="381.0" mnemonicParsing="false" onAction="#doRegistration" prefHeight="25.0" prefWidth="113.0" text="Cadastrar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="120.0" />
-                     <Button fx:id="btnCancel" layoutX="528.0" layoutY="381.0" mnemonicParsing="false" onAction="#cancelRegistration" styleClass="btnCancel" stylesheets="@../styles/Styles.css" text="Cancelar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0" />
+                        <Button fx:id="btnRegister" layoutX="411.0" layoutY="381.0" mnemonicParsing="false" onAction="#doRegistration" prefHeight="25.0" prefWidth="113.0" text="Cadastrar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="120.0" />
+                     	<Button fx:id="btnCancel" layoutX="528.0" layoutY="381.0" mnemonicParsing="false" onAction="#cancelRegistration" styleClass="btnCancel" stylesheets="@../styles/Styles.css" text="Cancelar" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="30.0" />
                         <Label layoutX="42.0" layoutY="27.0" text="Novo Cliente" />
                         <Separator layoutX="26.0" layoutY="338.0" prefHeight="0.0" prefWidth="578.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="30.0" />
                   </children></AnchorPane>

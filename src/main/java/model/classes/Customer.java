@@ -1,6 +1,9 @@
 package model.classes;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Customer extends Person{
 
@@ -17,8 +20,18 @@ public class Customer extends Person{
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthDate(String string) throws ParseException {
+		if (string == null || string.equals(""))
+			this.birthDate = null;
+        Date date = null;
+        try {
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            date = (Date)formatter.parse(string);
+            this.birthDate = date;
+        } catch (ParseException e) {
+        	this.birthDate = null;
+            throw e;
+        }
 	}
 
 	public String getCpf() {
