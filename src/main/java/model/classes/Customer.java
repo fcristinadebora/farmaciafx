@@ -33,6 +33,13 @@ public class Customer extends Person{
             throw e;
         }
 	}
+	
+	public void setBirthDate(Date date) throws ParseException {
+		if (date == null)
+			this.birthDate = null;
+		
+        this.birthDate = date;
+	}
 
 	public String getCpf() {
 		return cpf;

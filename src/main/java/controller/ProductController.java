@@ -16,7 +16,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.control.Button;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
@@ -62,15 +68,24 @@ public class ProductController implements Initializable{
 	@FXML
 	private Button btnCancel;
 	@FXML
+	private Button btnOpen;
+	@FXML
 	private Button btnRegister;
 	
 	private SingleSelectionModel<Tab> selectionModel;	
     private ObservableList<StockProduct> observableListStockProduct;
+   
+    private StockProduct itemSelecionado; 
+    
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			this.listItems();
+			
+			tableViewStockProduct.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> selecionarItemTabela(newValue));
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,34 +104,27 @@ public class ProductController implements Initializable{
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         
-        /*
-        colOpen.setCellValueFactory(
-        	    param -> new ReadOnlyObjectWrapper<>(param.getValue())
-        	);
-        	colOpen.setCellFactory(param -> new TableCell<StockProduct, StockProduct>() {
-        	    private final Button deleteButton = new Button("Unfriend");
-
-        	    @Override
-        	    protected void updateItem(StockProduct person, boolean empty) {
-        	        super.updateItem(person, empty);
-
-        	        if (person == null) {
-        	            setGraphic(null);
-        	            return;
-        	        }
-
-        	        setGraphic(deleteButton);
-        	        deleteButton.setOnAction(
-        	            event -> getTableView().getItems().remove(person)
-        	        );
-        	    }
-        	});
-        */
-        
         observableListStockProduct = FXCollections.observableArrayList(itemList);
         tableViewStockProduct.setItems(observableListStockProduct);
         
     }
+	
+	public void selecionarItemTabela(StockProduct pro) {
+		this.itemSelecionado = pro;
+	}
+	
+	@FXML
+	public void excluirItem() throws IOException {
+		int confirm = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o produto " + this.itemSelecionado.getName());
+		if(confirm == JOptionPane.YES_OPTION){
+			StockProductDAO proDao = new StockProductDAO();
+			Connection con = DatabaseMySQL.getConnection();
+			proDao.setConnection((com.mysql.jdbc.Connection) con);
+			proDao.remover(this.itemSelecionado);
+			JOptionPane.showMessageDialog(null, "Item excluído com sucesso!");
+			this.listItems();
+		}
+	}
 	
 	@FXML
     public void doRegistration(ActionEvent e) throws IOException{
@@ -168,6 +176,18 @@ public class ProductController implements Initializable{
 		
 		btnRegister.setDisable(false);
 		btnCancel.setDisable(false);
+    }
+	
+	@FXML
+	private void showDetails() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/ProductDetails.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("ABC");
+        stage.setScene(new Scene(root1));  
+        stage.show();
     }
 	
 	@FXML
